@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#23B82D</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorAccent">#9E9E9E</color>
+    <color name="divColor">#BDBDBD</color>
+    <color name="primaryText">@android:color/white</color>
+    <color name="secondText">#212121</color>
+    <color name="background_controles">#53292929</color>
+    <color name="background_cards_views">#D5F7D8</color>
+    <color name="vueltas_no_hechas">#90CAF9</color>
+</resources>
