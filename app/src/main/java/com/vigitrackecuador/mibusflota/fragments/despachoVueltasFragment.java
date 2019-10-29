@@ -59,6 +59,7 @@ public class despachoVueltasFragment extends Fragment
     //Variables para obtener la fecha
     final int mes = c.get(Calendar.MONTH);
     final int dia = c.get(Calendar.DAY_OF_MONTH);
+    String noser;
     final int anio = c.get(Calendar.YEAR);
     TextView fecha_lista;
     ImageView img_fecha;
@@ -188,8 +189,8 @@ public class despachoVueltasFragment extends Fragment
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.hide();
-                String norespodeservidor="null";
-                if(norespodeservidor.equals(error.getMessage().toString()))
+                noser="null";
+                if(noser.equals(String.valueOf(error.getMessage())))
                 {
                     Toast.makeText(getContext(), "Servidor no respode vuelta a intentarlo ", Toast.LENGTH_SHORT).show();
                 }else {

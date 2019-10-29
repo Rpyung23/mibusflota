@@ -5,7 +5,7 @@ import java.sql.Date;
 public class cFlotas
 {
     private String id_bus;
-    private int id_ruta;
+    private long id_ruta;
     private String letra_ruta;
     private String date_salida;
     private String date_llegada;
@@ -24,11 +24,11 @@ public class cFlotas
         this.id_bus = id_bus;
     }
 
-    public int getId_ruta() {
+    public long getId_ruta() {
         return id_ruta;
     }
 
-    public void setId_ruta(int id_ruta) {
+    public void setId_ruta(long id_ruta) {
         this.id_ruta = id_ruta;
     }
 

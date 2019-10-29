@@ -15,15 +15,15 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_marginBottom="5dp"
-            android:layout_gravity="center"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="161dp"
+            android:layout_height="137dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:scaleType="fitCenter"
-            android:src="@drawable/logomenufinal" />
+            android:src="@drawable/logo_general" />
     </LinearLayout>
 <LinearLayout
     android:gravity="center"

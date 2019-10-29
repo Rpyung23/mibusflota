@@ -14,18 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:gravity="center"
             android:background="@android:color/white"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="126dp"
-                android:background="@drawable/logomenufinal"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:background="@drawable/logo_general"
                 android:scaleType="centerCrop">
-
             </androidx.appcompat.widget.AppCompatImageView>
             <LinearLayout
                 android:layout_margin="10dp"
