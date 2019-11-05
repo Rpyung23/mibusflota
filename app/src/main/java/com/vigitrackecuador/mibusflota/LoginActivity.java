@@ -443,7 +443,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/rtigre/despachoHorasWebService.php";
                         break;
                     case 9:
-                        Toast.makeText(getApplicationContext(), "No ip", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No ip server", Toast.LENGTH_SHORT).show();
                         break;
                     case 10:
                         url_login = "http://www.vigitrackecuador.com/webservice/prado-eco/verificarLoginWebService.php";
@@ -663,7 +663,7 @@ public class LoginActivity extends AppCompatActivity {
         //Toast.makeText(this, "GSP"+empresaLeer+"-"+ UserLeer+"-"+PassLeer, Toast.LENGTH_LONG).show();
         if (empresaLeer.equals("ErrorE") || UserLeer.equals("ErrorU") || PassLeer.equals("ErrorP"))
         {
-            //Toast.makeText(LoginActivity.this,"Error SP",Toast.LENGTH_SHORT);
+            Toast.makeText(LoginActivity.this,"Error SP",Toast.LENGTH_SHORT);
         } else {
             textViewEmpresa.setText(empresaLeer);
             textViewUser.setText(UserLeer);
@@ -746,20 +746,20 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (JSONException e)
                 {
 
-                    Toast.makeText(LoginActivity.this, "Datos no validos : "+e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Datos no validos : "+e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 String errornull="null";
-                if (errornull.equals(error.getMessage().toString()))
+                if (errornull.equals(error.getMessage()))
                 {
                     Toast.makeText(LoginActivity.this, "Servidor no Responde", Toast.LENGTH_SHORT).show();
                 }
                 else
                     {
-                        Toast.makeText(LoginActivity.this, "Datos No validos : "+error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Datos No validos : "+error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
             }
