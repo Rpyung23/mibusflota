@@ -217,13 +217,13 @@ public class DespachoHorasFragment extends Fragment
             public void onErrorResponse(VolleyError error)
             {
                 String servidornorespode="null";
-                if(servidornorespode.equals(error.getMessage().toString()))
+                if(servidornorespode.equals(error.getMessage()))
                 {
                     Toast.makeText(getContext(), "Servidor no responde vuelva a intentar", Toast.LENGTH_SHORT).show();
                 }
                 else
                     {
-                        Toast.makeText(getContext(), "No existe información", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "No existe información"+error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 BajadaP1.setText("0000");
                 BajadaP2.setText("0000");
