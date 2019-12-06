@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -44,6 +45,7 @@ import static com.vigitrackecuador.mibusflota.LoginActivity.url_despacho_horas;
  */
 public class DespachoHorasFragment extends Fragment
 {
+    private static final int MY_SOCKET_TIMEOUT_MS = 30000;
     ImageButton imageButtonFechaDespacho;
     ImageButton imageButtonHoraInicial;
     ImageButton imageButtonHoraFinal;
@@ -236,6 +238,10 @@ public class DespachoHorasFragment extends Fragment
                 progressDialog.hide();
             }
         });
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueuejsonConteoGHoras = Volley.newRequestQueue(getContext());
         requestQueuejsonConteoGHoras.add(jsonArrayRequest);
     }
