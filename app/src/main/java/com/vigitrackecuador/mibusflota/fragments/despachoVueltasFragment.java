@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,6 +46,7 @@ import static com.vigitrackecuador.mibusflota.LoginActivity.url_despacho;
 
 public class despachoVueltasFragment extends Fragment
 {
+    private static final int MY_SOCKET_TIMEOUT_MS = 30000;
     RecyclerView recyclerViewFlotas;
     JsonArrayRequest jsonArrayRequestDespacho;
     RequestQueue requestQueueDespacho;
@@ -199,6 +201,10 @@ public class despachoVueltasFragment extends Fragment
 
             }
         });
+        jsonArrayRequestlista.setRetryPolicy(new DefaultRetryPolicy(
+            MY_SOCKET_TIMEOUT_MS,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueuelista= Volley.newRequestQueue(getContext());
         requestQueuelista.add(jsonArrayRequestlista);
 

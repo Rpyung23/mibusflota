@@ -10,6 +10,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 public class Vueltas_PDF_Activity extends AppCompatActivity
 {
+    private static final int MY_SOCKET_TIMEOUT_MS = 30000;
     TableLayout tableLayout;
     ArrayList<cDespacho>arrayListDespacho= new ArrayList<cDespacho>();
     cDespacho oD;
@@ -189,6 +191,10 @@ public class Vueltas_PDF_Activity extends AppCompatActivity
                 Toast.makeText(Vueltas_PDF_Activity.this, "ErrorListener : Servidor no responde", Toast.LENGTH_SHORT).show();
             }
         });
+        jsonArrayRequestDespachoVueltasPdf.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueueDespachoVueltasPdf= Volley.newRequestQueue(getApplicationContext());
         requestQueueDespachoVueltasPdf.add(jsonArrayRequestDespachoVueltasPdf);
 
