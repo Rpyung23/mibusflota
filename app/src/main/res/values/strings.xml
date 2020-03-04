@@ -23,11 +23,8 @@
     <string name="generar_product">GENERAR REPORTE</string>
     <string-array name="Empresas">
         <item>Selecione su Empresa</item>
-        <item>Liribamba</item>
         <item>Cooperativa Salitre</item>
-        <item>Puruha</item>
         <item>Horizonte</item>
-        <item>Trunsa</item>
         <item>Citim</item>
         <item>Orquidia Amazonica</item>
         <item>Rio Tigre</item>
@@ -44,9 +41,7 @@
         <item>Sucua</item>
         <item>Trujama SA</item>
         <item>Otavalo-Lagos</item>
-        <item>Transfransa</item>
         <item>Tungurahua</item>
-        <item>Santa Martha</item>
         <item>Miraflores</item>
     </string-array>
     <string-array name="tipo_mapas_array">

@@ -23,6 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -67,6 +68,7 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
     private Handler handler = new Handler();
     String aux;
     GoogleMap mMap;
+    JsonObjectRequest jsonObjectRequest;
     MapView mapView;
     Marker oMarker;
     double latiBus = 0.0;
@@ -159,6 +161,7 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
                     .color(R.color.background_controles));
         }
     }
+
     private void ConsumirWebServicePosicionesBuses()
     {
         if (oMarker!=null)
@@ -177,7 +180,52 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
         envio2 = aux;
         String rutanuevapos = "idbusObse=" + aux;
         String uri_pos = url_mapa_gps + "?" + rutanuevapos;
-        jsonArrayRequestPosBuses = new JsonArrayRequest(uri_pos, new Response.Listener<JSONArray>() {
+
+        jsonObjectRequest= new JsonObjectRequest(uri_pos,null,new Response.Listener<JSONObject>(){
+            @Override
+            public void onResponse(JSONObject jsonObject)
+            {
+                try {
+                    latiBus = jsonObject.getDouble("UltiLatiMoni");
+                    longiBus = jsonObject.getDouble("UltiLongMoni");
+                    int velocidad=jsonObject.getInt("UltiVeloMoni");
+                    angulo=jsonObject.getInt("UltiRumbMoni");
+                    LatLng oL = new LatLng(latiBus, longiBus);
+                    String fecha_moni = jsonObject.getString("UltiFechMoni");
+
+                    if (centrar==false)
+                    {
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(oL, 18));
+                        centrar=true;
+                    }
+                    if (angulo>0 && angulo<=180)
+                    {
+                        oMarker = mMap.addMarker(new MarkerOptions().position(oL).title("Unidad : " + aux).snippet("HORA : " + fecha_moni +" "+velocidad+ " Km"+" Posición : " + latiBus + " - " + longiBus)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.b2)).anchor(v1,v2)
+                                .rotation(angulo).flat(true));
+
+                    }
+                    else
+                    {
+                        oMarker = mMap.addMarker(new MarkerOptions().position(oL).title("Unidad : " + aux).snippet("HORA : " + fecha_moni +" "+velocidad+ " Km"+" Posición : " + latiBus + " - " + longiBus)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.b)).anchor(v1,v2)
+                                .rotation(angulo).flat(true));
+                    }
+                    banControles=true;
+
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "Error : "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "ErrorResponse : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        /*jsonArrayRequestPosBuses = new JsonArrayRequest(uri_pos, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -187,9 +235,8 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
                     int velocidad=jsonObject.getInt("UltiVeloMoni");
                     angulo=jsonObject.getInt("UltiRumbMoni");
                     LatLng oL = new LatLng(latiBus, longiBus);
-                    Calendar c = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                    String strDate = sdf.format(c.getTime());
+                    String fecha_moni = jsonObject.getString("UltiFechMoni");
+
                     if (centrar==false)
                     {
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(oL, 18));
@@ -197,17 +244,17 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
                     }
                     if (angulo>0 && angulo<=180)
                     {
-                            oMarker = mMap.addMarker(new MarkerOptions().position(oL).title("Unidad : " + aux).snippet("HORA : " + strDate +" "+velocidad+ " Km"+" Posición : " + latiBus + " - " + longiBus)
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.b2)).anchor(v1,v2)
-                                    .rotation(angulo).flat(true));
+                        oMarker = mMap.addMarker(new MarkerOptions().position(oL).title("Unidad : " + aux).snippet("HORA : " + fecha_moni +" "+velocidad+ " Km"+" Posición : " + latiBus + " - " + longiBus)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.b2)).anchor(v1,v2)
+                                .rotation(angulo).flat(true));
 
                     }
                     else
-                        {
-                        oMarker = mMap.addMarker(new MarkerOptions().position(oL).title("Unidad : " + aux).snippet("HORA : " + strDate +" "+velocidad+ " Km"+" Posición : " + latiBus + " - " + longiBus)
+                    {
+                        oMarker = mMap.addMarker(new MarkerOptions().position(oL).title("Unidad : " + aux).snippet("HORA : " + fecha_moni +" "+velocidad+ " Km"+" Posición : " + latiBus + " - " + longiBus)
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.b)).anchor(v1,v2)
                                 .rotation(angulo).flat(true));
-                        }
+                    }
                     banControles=true;
                 } catch (JSONException j) {
                     Toast.makeText(getContext(), "JSONException : " + j, Toast.LENGTH_SHORT).show();
@@ -219,10 +266,12 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "ErrorResponse : " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         requestQueuePosBuses = Volley.newRequestQueue(getContext());
-        requestQueuePosBuses.add(jsonArrayRequestPosBuses);
+        requestQueuePosBuses.add(jsonObjectRequest);
     }
+
+
 
     private float getgrados(LatLng posI,LatLng poLL)
     {
@@ -360,6 +409,6 @@ public class RutasFragment extends Fragment implements OnMapReadyCallback, Locat
     {
         Toast.makeText(getContext(), "Cambio", Toast.LENGTH_SHORT).show();
         LatLng latLng= new LatLng(location.getLatitude(),location.getLongitude());
-        mYo=mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.marketyo)));
+        //mYo=mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.marketyo)));
     }
 }

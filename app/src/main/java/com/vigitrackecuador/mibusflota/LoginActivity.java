@@ -31,6 +31,8 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.itextpdf.text.Paragraph;
 import com.vigitrackecuador.mibusflota.POO.cContrles;
 import com.vigitrackecuador.mibusflota.POO.cIdBus;
@@ -57,8 +59,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_Ingresar;
     String user_name_xml;
     String pass_name_xml;
-    TextView textViewUser;
-    TextView textViewPass;
+    TextInputEditText textViewUser;
+    TextInputEditText textViewPass;
     TextView textViewEmpresa;
     RequestQueue requestQueue; //permite la conccion con el webService
     JsonArrayRequest jsonObjectRequest; //permite la conccion con el webService
@@ -102,15 +104,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             oSpinner.setEnabled(false);
             empresa=empresaLeer;
-            if (empresaLeer.equals("Liribamba")) {
-                url_login = "http://www.vigitrackecuador.com/webservice/liribamba/verificarLoginWebService.php";
-                url_mapa = "http://www.vigitrackecuador.com/webservice/liribamba/mapaFlotaWebService.php";//obtiene las id de los buses
-                url_mapa_gps = "http://www.vigitrackecuador.com/webservice/liribamba/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                url_despacho = "http://www.vigitrackecuador.com/webservice/liribamba/despachoWebService.php";
-                url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/liribamba/despachoPdfwebservice.php";
-                url_control_mapa = "http://www.vigitrackecuador.com/webservice/liribamba/controlesWebService.php";
-                url_despacho_horas = "http://www.vigitrackecuador.com/webservice/liribamba/despachoHorasWebService.php";
-            }
             if (empresaLeer.equals("Cooperativa Salitre")) {
                 url_login = "http://www.vigitrackecuador.com/webservice/rsalitrena/verificarLoginWebService.php";
                 url_mapa = "http://www.vigitrackecuador.com/webservice/rsalitrena/mapaFlotaWebService.php";//obtiene las id de los buses
@@ -120,15 +113,6 @@ public class LoginActivity extends AppCompatActivity {
                 url_control_mapa = "http://www.vigitrackecuador.com/webservice/rsalitrena/controlesWebService.php";
                 url_despacho_horas = "http://www.vigitrackecuador.com/webservice/rsalitrena/despachoHorasWebService.php";
             }
-            if (empresaLeer.equals("Puruha")) {
-                url_login = "http://www.vigitrackecuador.com/webservice/puruha/verificarLoginWebService.php";
-                url_mapa = "http://www.vigitrackecuador.com/webservice/puruha/mapaFlotaWebService.php";//obtiene las id de los buses
-                url_mapa_gps = "http://www.vigitrackecuador.com/webservice/puruha/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                url_despacho = "http://www.vigitrackecuador.com/webservice/puruha/despachoWebService.php";
-                url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/puruha/despachoPdfwebservice.php";
-                url_control_mapa = "http://www.vigitrackecuador.com/webservice/puruha/controlesWebService.php";
-                url_despacho_horas = "http://www.vigitrackecuador.com/webservice/puruha/despachoHorasWebService.php";
-            }
             if (empresaLeer.equals("Horizonte")) {
                 url_login = "http://www.vigitrackecuador.com/webservice/horizonte/verificarLoginWebService.php";
                 url_mapa = "http://www.vigitrackecuador.com/webservice/horizonte/mapaFlotaWebService.php";//obtiene las id de los buses
@@ -137,16 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                 url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/horizonte/despachoPdfwebservice.php";
                 url_control_mapa = "http://www.vigitrackecuador.com/webservice/horizonte/controlesWebService.php";
                 url_despacho_horas = "http://www.vigitrackecuador.com/webservice/horizonte/despachoHorasWebService.php";
-            }
-            if (empresaLeer.equals("Trunsa"))
-            {
-                url_login = "http://www.vigitrackecuador.com/webservice/trunsa/verificarLoginWebService.php";
-                url_mapa = "http://www.vigitrackecuador.com/webservice/trunsa/mapaFlotaWebService.php";//obtiene las id de los buses
-                url_mapa_gps = "http://www.vigitrackecuador.com/webservice/trunsa/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                url_despacho = "http://www.vigitrackecuador.com/webservice/trunsa/despachoWebService.php";
-                url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/trunsa/despachoPdfwebservice.php";
-                url_control_mapa = "http://www.vigitrackecuador.com/webservice/trunsa/controlesWebService.php";
-                url_despacho_horas = "http://www.vigitrackecuador.com/webservice/trunsa/despachoHorasWebService.php";
             }
             if (empresaLeer.equals("Citim"))
             {
@@ -316,17 +290,6 @@ public class LoginActivity extends AppCompatActivity {
                 url_despacho_horas = "http://www.vigitrackecuador.com/webservice/otavalo-lag/despachoHorasWebService.php";
 
             }
-            if (empresaLeer.equals("Transfransa"))
-            {
-                url_login = "http://www.vigitrackecuador.com/webservice/transfransa/verificarLoginWebService.php";
-                url_mapa = "http://www.vigitrackecuador.com/webservice/transfransa/mapaFlotaWebService.php";//obtiene las id de los buses
-                url_mapa_gps = "http://www.vigitrackecuador.com/webservice/transfransa/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                url_despacho = "http://www.vigitrackecuador.com/webservice/transfransa/despachoWebService.php";
-                url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/transfransa/despachoPdfwebservice.php";
-                url_control_mapa = "http://www.vigitrackecuador.com/webservice/transfransa/controlesWebService.php";
-                url_despacho_horas = "http://www.vigitrackecuador.com/webservice/transfransa/despachoHorasWebService.php";
-
-            }
             if (empresaLeer.equals("Tungurahua"))
             {
                 url_login = "http://www.vigitrackecuador.com/webservice/tungurahua/verificarLoginWebService.php";
@@ -336,17 +299,6 @@ public class LoginActivity extends AppCompatActivity {
                 url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/tungurahua/despachoPdfwebservice.php";
                 url_control_mapa = "http://www.vigitrackecuador.com/webservice/tungurahua/controlesWebService.php";
                 url_despacho_horas = "http://www.vigitrackecuador.com/webservice/tungurahua/despachoHorasWebService.php";
-
-            }
-            if (empresaLeer.equals("Santa Martha"))
-            {
-                url_login = "http://www.vigitrackecuador.com/webservice/smartha/verificarLoginWebService.php";
-                url_mapa = "http://www.vigitrackecuador.com/webservice/smartha/mapaFlotaWebService.php";//obtiene las id de los buses
-                url_mapa_gps = "http://www.vigitrackecuador.com/webservice/smartha/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                url_despacho = "http://www.vigitrackecuador.com/webservice/smartha/despachoWebService.php";
-                url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/smartha/despachoPdfwebservice.php";
-                url_control_mapa = "http://www.vigitrackecuador.com/webservice/smartha/controlesWebService.php";
-                url_despacho_horas = "http://www.vigitrackecuador.com/webservice/smartha/despachoHorasWebService.php";
 
             }
             if (empresaLeer.equals("Miraflores"))
@@ -371,15 +323,6 @@ public class LoginActivity extends AppCompatActivity {
                     case 0:
                         break;
                     case 1:
-                        url_login = "http://www.vigitrackecuador.com//webservice/liribamba/verificarLoginWebService.php";
-                        url_mapa = "http://www.vigitrackecuador.com//webservice/liribamba/mapaFlotaWebService.php";//obtiene las id de los buses
-                        url_mapa_gps = "http://www.vigitrackecuador.com/webservice/liribamba/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                        url_despacho = "http://www.vigitrackecuador.com/webservice/liribamba/despachoWebService.php";
-                        url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/liribamba/despachoPdfwebservice.php";
-                        url_control_mapa = "http://www.vigitrackecuador.com/webservice/liribamba/controlesWebService.php";
-                        url_despacho_horas = "http://www.vigitrackecuador.com/webservice/liribamba/despachoHorasWebService.php";
-                        break;
-                    case 2:
                         url_login = "http://www.vigitrackecuador.com/webservice/rsalitrena/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/rsalitrena/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/rsalitrena/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -388,16 +331,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/rsalitrena/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/rsalitrena/despachoHorasWebService.php";
                         break;
-                    case 3:
-                        url_login = "http://www.vigitrackecuador.com/webservice/puruha/verificarLoginWebService.php";
-                        url_mapa = "http://www.vigitrackecuador.com/webservice/puruha/mapaFlotaWebService.php";//obtiene las id de los buses
-                        url_mapa_gps = "http://www.vigitrackecuador.com/webservice/puruha/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                        url_despacho = "http://www.vigitrackecuador.com/webservice/puruha/despachoWebService.php";
-                        url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/puruha/despachoPdfwebservice.php";
-                        url_control_mapa = "http://www.vigitrackecuador.com/webservice/puruha/controlesWebService.php";
-                        url_despacho_horas = "http://www.vigitrackecuador.com/webservice/puruha/despachoHorasWebService.php";
-                        break;
-                    case 4:
+                    case 2:
                         url_login = "http://www.vigitrackecuador.com/webservice/horizonte/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/horizonte/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/horizonte/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -406,16 +340,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com//webservice/horizonte/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/horizonte/despachoHorasWebService.php";
                         break;
-                    case 5:
-                        url_login = "http://www.vigitrackecuador.com/webservice/trunsa/verificarLoginWebService.php";
-                        url_mapa = "http://www.vigitrackecuador.com/webservice/trunsa/mapaFlotaWebService.php";//obtiene las id de los buses
-                        url_mapa_gps = "http://www.vigitrackecuador.com/webservice/trunsa/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                        url_despacho = "http://www.vigitrackecuador.com/webservice/trunsa/despachoWebService.php";
-                        url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/trunsa/despachoPdfwebservice.php";
-                        url_control_mapa = "http://www.vigitrackecuador.com/webservice/trunsa/controlesWebService.php";
-                        url_despacho_horas = "http://www.vigitrackecuador.com/webservice/trunsa/despachoHorasWebService.php";
-                        break;
-                    case 6:
+                    case 3:
                         url_login = "http://www.vigitrackecuador.com/webservice/citim/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/citim/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/citim/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -424,7 +349,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/citim/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/citim/despachoHorasWebService.php";
                         break;
-                    case 7:
+                    case 4:
                         url_login = "http://www.vigitrackecuador.com/webservice/oamazonica/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/oamazonica/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/oamazonica/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -433,7 +358,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/oamazonica/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/oamazonica/despachoHorasWebService.php";
                         break;
-                    case 8:
+                    case 5:
                         url_login = "http://www.vigitrackecuador.com/webservice/rtigre/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/rtigre/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/rtigre/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -442,10 +367,10 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/rtigre/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/rtigre/despachoHorasWebService.php";
                         break;
-                    case 9:
+                    case 6:
                         Toast.makeText(getApplicationContext(), "No ip server", Toast.LENGTH_SHORT).show();
                         break;
-                    case 10:
+                    case 7:
                         url_login = "http://www.vigitrackecuador.com/webservice/prado-eco/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/prado-eco/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/prado-eco/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -454,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/prado-eco/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/prado-eco/despachoHorasWebService.php";
                         break;
-                    case 11:
+                    case 8:
                         url_login = "http://www.vigitrackecuador.com/webservice/consorcio-r/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/consorcio-r/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/consorcio-r/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -463,7 +388,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/consorcio-r/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/consorcio-r/despachoHorasWebService.php";
                         break;
-                    case 12:
+                    case 9:
                         url_login = "http://www.vigitrackecuador.com/webservice/cotopaxi/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/cotopaxi/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/cotopaxi/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -472,7 +397,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/cotopaxi/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/cotopaxi/despachoHorasWebService.php";
                         break;
-                    case 13:
+                    case 10:
                         url_login = "http://www.vigitrackecuador.com/webservice/slucia/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/slucia/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/slucia/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -481,7 +406,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/slucia/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/slucia/despachoHorasWebService.php";
                         break;
-                    case 14:
+                    case 11:
                         url_login = "http://www.vigitrackecuador.com/webservice/rportov/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/rportov/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/rportov/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -490,7 +415,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/rportov/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/rportov/despachoHorasWebService.php";
                         break;
-                    case 15:
+                    case 12:
                         url_login = "http://www.vigitrackecuador.com/webservice/selisa/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/selisa/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/selisa/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -499,7 +424,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/selisa/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/selisa/despachoHorasWebService.php";
                         break;
-                    case 16:
+                    case 13:
                         url_login = "http://www.vigitrackecuador.com/webservice/yaguachi/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/yaguachi/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/yaguachi/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -508,7 +433,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/yaguachi/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/yaguachi/despachoHorasWebService.php";
                         break;
-                    case 17:
+                    case 14:
                         url_login = "http://www.vigitrackecuador.com/webservice/sclara/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/sclara/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/sclara/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -517,7 +442,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/sclara/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/sclara/despachoHorasWebService.php";
                         break;
-                    case 18:
+                    case 15:
                         url_login = "http://www.vigitrackecuador.com/webservice/intra-puyo/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/intra-puyo/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/intra-puyo/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -526,7 +451,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/intra-puyo/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/intra-puyo/despachoHorasWebService.php";
                         break;
-                    case 19:
+                    case 16:
                         url_login = "http://www.vigitrackecuador.com/webservice/csucua/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/csucua/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/csucua/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -535,7 +460,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/csucua/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/csucua/despachoHorasWebService.php";
                         break;
-                    case 20:
+                    case 17:
                         url_login = "http://www.vigitrackecuador.com/webservice/trujamasa/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/trujamasa/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/trujamasa/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -544,7 +469,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/trujamasa/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/trujamasa/despachoHorasWebService.php";
                         break;
-                    case 21:
+                    case 18:
                         url_login = "http://www.vigitrackecuador.com/webservice/otavalo-lag/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/otavalo-lag/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/otavalo-lag/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -553,16 +478,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/otavalo-lag/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/otavalo-lag/despachoHorasWebService.php";
                         break;
-                    case 22:
-                        url_login = "http://www.vigitrackecuador.com/webservice/transfransa/verificarLoginWebService.php";
-                        url_mapa = "http://www.vigitrackecuador.com/webservice/transfransa/mapaFlotaWebService.php";//obtiene las id de los buses
-                        url_mapa_gps = "http://www.vigitrackecuador.com/webservice/transfransa/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                        url_despacho = "http://www.vigitrackecuador.com/webservice/transfransa/despachoWebService.php";
-                        url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/transfransa/despachoPdfwebservice.php";
-                        url_control_mapa = "http://www.vigitrackecuador.com/webservice/transfransa/controlesWebService.php";
-                        url_despacho_horas = "http://www.vigitrackecuador.com/webservice/transfransa/despachoHorasWebService.php";
-                        break;
-                    case 23:
+                    case 19:
                         url_login = "http://www.vigitrackecuador.com/webservice/tungurahua/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/tungurahua/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/tungurahua/rastreoflotaWebService.php";//obtiene las posiciones de los buses
@@ -571,16 +487,7 @@ public class LoginActivity extends AppCompatActivity {
                         url_control_mapa = "http://www.vigitrackecuador.com/webservice/tungurahua/controlesWebService.php";
                         url_despacho_horas = "http://www.vigitrackecuador.com/webservice/tungurahua/despachoHorasWebService.php";
                         break;
-                    case 24:
-                        url_login = "http://www.vigitrackecuador.com/webservice/smartha/verificarLoginWebService.php";
-                        url_mapa = "http://www.vigitrackecuador.com/webservice/smartha/mapaFlotaWebService.php";//obtiene las id de los buses
-                        url_mapa_gps = "http://www.vigitrackecuador.com/webservice/smartha/rastreoflotaWebService.php";//obtiene las posiciones de los buses
-                        url_despacho = "http://www.vigitrackecuador.com/webservice/smartha/despachoWebService.php";
-                        url_despacho_pdf = "http://www.vigitrackecuador.com/webservice/smartha/despachoPdfwebservice.php";
-                        url_control_mapa = "http://www.vigitrackecuador.com/webservice/smartha/controlesWebService.php";
-                        url_despacho_horas = "http://www.vigitrackecuador.com/webservice/smartha/despachoHorasWebService.php";
-                        break;
-                    case 25:
+                    case 20:
                         url_login = "http://www.vigitrackecuador.com/webservice/viaflores/verificarLoginWebService.php";
                         url_mapa = "http://www.vigitrackecuador.com/webservice/viaflores/mapaFlotaWebService.php";//obtiene las id de los buses
                         url_mapa_gps = "http://www.vigitrackecuador.com/webservice/viaflores/rastreoflotaWebService.php";//obtiene las posiciones de los buses
